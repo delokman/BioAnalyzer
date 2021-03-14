@@ -11,7 +11,7 @@
 **FR** BioAnalyzer est un module qui vous permet d'extraire les informations personnelles d'un profil instagram via sa bio telles que : Religion, Hobbies, Origines ethniques, Emails, Paypal.me/, Snapchat, Twitter, Meilleurs amis, Age, Localisation (Ville, Pays), Situation amoureuse, Durée de la situation amoureuse, Facebooks, Signes astro, Sexualité.
 
 ## 📷 Demo
-![alt text](https://images-ext-1.discordapp.net/external/pyjWbOcVEiv-VOzrw-UvzX0sV5fT4pVnAPeIiTbo2xY/https/pbs.twimg.com/media/Ev034bhXEAsNDLg.png%3Alarge)
+![alt text](https://i.ibb.co/Nxbw0hq/Capture.png)
 
 ##  📝 Contact
 Mail : _daluna_pro@protonmail.ch_.
