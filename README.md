@@ -8,4 +8,4 @@ BioIG is a module that allows you to extract personnals informations from an ins
 Mail : _daluna_pro@protonmail.ch_.
 
 ## 📚 Contributions
-All suggestions are welcome.
+All Suggestions/Contributions are welcome.
