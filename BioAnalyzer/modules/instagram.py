@@ -1,27 +1,8 @@
 import requests, bs4, argparse
-from bs4 import BeautifulSoup
+from bs4   import BeautifulSoup
 
-def getInstagramInfos(username):
-    bios = []
-    
-    url = "https://smihub.com/v/{}".format(username)
-
-    r = requests.get(url=url)
-    page = r.content.decode()
-    features = "html.parser"
-    soup = BeautifulSoup(page,features)
-
-    bioo = str(soup.find('div',{'class':'user__info-desc'}))
-
-    bioo = bioo.replace('<div','').replace('</div>','').replace('class="user__info-desc">','').strip()
-
-    while "<br/" in bioo:
-        bioo = bioo.replace('<br/','\n')
-
-    while ">" in bioo:
-        bioo = bioo.replace(">",'')
-    
-    bios.append(bioo)
+def get_info_from_bio(bio):
+    lines = bio.split('\n')
 
     religions = [
         ('✡️','Judaism'),
@@ -106,10 +87,7 @@ def getInstagramInfos(username):
         ('🇬🇷','Greece')
     ]
 
-    for bio in bios:
-        lines = bio.split('\n')
-
-        emailss = [
+    emailss = [
             '@icloud.com',
             '@gmail.com',
             '@gmx.fr',
@@ -141,115 +119,116 @@ def getInstagramInfos(username):
             '@thepauseagency.com',
             '@alexotime.com',
             '@tomorrowhub.com'
-        ]
+    ]
 
-        bio_infos       = {}
-        emails_final    = []
-        snapchat_final  = []
-        paypals         = []
-        best_friend     = []
-        ages            = []
-        love_date_since = []
-        school_list     = []
-        city_list       = []
-        lgbt_points     = []
-        fb_list         = []
-        twitter_list    = []
-        flag_list       = []
-        religions_targ  = []
-        astro_sign      = []
-        hobbies_emojis  = []
-        love_situation  = []
+    bio_infos       = {}
+    emails_final    = []
+    snapchat_final  = []
+    paypals         = []
+    best_friend     = []
+    ages            = []
+    love_date_since = []
+    school_list     = []
+    city_list       = []
+    lgbt_points     = []
+    fb_list         = []
+    twitter_list    = []
+    flag_list       = []
+    religions_targ  = []
+    astro_sign      = []
+    hobbies_emojis  = []
+    love_situation  = []
 
-        for line in lines:
-            line = line.replace('</a','').replace('<a href="/v','').replace('<a href="/t/','')
-            line = line.lower()
-            for i in religions:
-                emoji, religionName = i
-                if emoji in line or religionName.lower() in line:
-                    religions_targ.append(religionName)
-            for i in astrology_signs:
-                emoji, sign, date = i
-                if emoji in line:
-                    astro_sign.append('{} | {}'.format(sign,date))
-            for flagos in ethnical_origins:
-                flag, country_full = flagos
-                if flag in line:
-                    flag_list.append(country_full)
-            for i in hobbies:
-                emoji, name = i
-                if emoji in line:
-                    hobbies_emojis.append(name)
-            temp_list_love = []
-            for chars in line:
-                if chars == "/":
-                    temp_list_love.append('.')
-            if "en couple" in line or "🔒" in line or "🔐" in line:
-                love_situation.append('Not Free | Taken')
-            if "celib" in line:
-                love_situation.append('Single | Free')
-            if "🏳️‍🌈" in line or "🏳️‍⚧️" in line:
-                lgbt_points.append('.')
-            if "facebook" in line:
+    for line in lines:
+        line = line.replace('</a','').replace('<a href="/v','').replace('<a href="/t/','')
+        line = line.lower()
+        for i in religions:
+            emoji, religionName = i
+            if emoji in line or religionName.lower() in line:
+                religions_targ.append(religionName)
+        for i in astrology_signs:
+            emoji, sign, date = i
+            if emoji in line:
+                astro_sign.append('{} | {}'.format(sign,date))
+        for flagos in ethnical_origins:
+            flag, country_full = flagos
+            if flag in line:
+                flag_list.append(country_full)
+        for i in hobbies:
+            emoji, name = i
+            if emoji in line:
+                hobbies_emojis.append(name)
+        temp_list_love = []
+        for chars in line:
+            if chars == "/":
+                temp_list_love.append('.')
+        if "en couple" in line or "🔒" in line or "🔐" in line:
+            love_situation.append('Not Free | Taken')
+        if "celib" in line:
+            love_situation.append('Single | Free')
+        if "🏳️‍🌈" in line or "🏳️‍⚧️" in line:
+            lgbt_points.append('.')
+        if "facebook" in line:
+            if ":" in line:
+                line = line.split(':')[1]
+            fb_list.append(line)
+        if "twitter" in line:
+            if ":" in line:
+                line = line.split(':')[1]
+            twitter_list.append(line)
+        if len(temp_list_love) == 2:
+            love_date_since.append(line)
+        if "📍" in line or "📌" in line:
+            city_list.append(line.replace('📍','').replace('📌','').replace(':',''))
+        if "snapchat" in line or "snap" in line or "👻" in line or "sc : " in line or "sc:" in line:
+            line = line.replace('👻','').strip()
+            if ":" in line:
+                line = line.split(':')[1].strip()
+            snapchat_final.append(line)
+        if "📚" in line or "🎓" in line:
+            school_list.append(line.replace('📚','').replace('🎓','').strip())
+        if "yo" in line or "years old" in line or "years" in line or "🎂" in line or "anniv" in line:
+            if "🎂" in line:
+                line = line.replace('🎂','')
                 if ":" in line:
                     line = line.split(':')[1]
-                fb_list.append(line)
-            if "twitter" in line:
-                if ":" in line:
-                    line = line.split(':')[1]
-                twitter_list.append(line)
-            if len(temp_list_love) == 2:
-                love_date_since.append(line)
-            if "📍" in line or "📌" in line:
-                city_list.append(line.replace('📍','').replace('📌','').replace(':',''))
-            if "snapchat" in line or "snap" in line or "👻" in line or "sc : " in line or "sc:" in line:
-                line = line.replace('👻','').strip()
-                if ":" in line:
-                    line = line.split(':')[1].strip()
-                snapchat_final.append(line)
-            if "📚" in line or "🎓" in line:
-                school_list.append(line.replace('📚','').replace('🎓','').strip())
-            if "yo" in line or "years old" in line or "years" in line or "🎂" in line or "anniv" in line:
-                if "🎂" in line:
-                    line = line.replace('🎂','')
-                    if ":" in line:
-                        line = line.split(':')[1]
-                    ages.append(line)
-                else:
-                    try:
-                        if "years" in line:
-                            age = int(line.split("years")[0].replace('years','').strip())
-                        elif "yo" in line:
-                            age = int(line.split("yo")[0].replace('yo','').strip())
-                        elif 'y' in line:
-                            age = int(line.split("y")[0].replace('y','').strip())
-                        else:
-                            age = int(line.split("years")[0].strip())
-                        ages.append(str(age))
-                    except ValueError:
-                        ages.append('Verify by yourself')
-            if "paypal.me/" in line:
-                paypal = ("paypal.me/"+line.split("paypal.me/")[1])
-                paypals.append(paypal)
-            if "@" in line:
-                line = line.replace('📩','')
-                temp_list_emails = []
-                if "/" in line and '"' in line:
-                    line = (line.replace('/','@').split('"')[0])
-                    temp_list_emails.append('.')
-                    domain = '@'+line.split('@')[1]
-                    if "." not in domain:
-                        line = "@"+line.split("@")[1]
-                        if " " in line:
-                            line = line.split(' ')[0]
-                        best_friend.append(line)
+                ages.append(line)
+            else:
+                try:
+                    if "years" in line:
+                        age = int(line.split("years")[0].replace('years','').strip())
+                    elif "yo" in line:
+                        age = int(line.split("yo")[0].replace('yo','').strip())
+                    elif 'y' in line:
+                        age = int(line.split("y")[0].replace('y','').strip())
                     else:
-                        for i in emailss:
-                            if domain == i:
-                                if line not in emails_final:
-                                    if ":" in line:
-                                        line = line.split(':')[1].strip()
-                                    emails_final.append(line)
+                        age = int(line.split("years")[0].strip())
+                    ages.append(str(age))
+                except ValueError:
+                    ages.append('Verify by yourself')
+        if "paypal.me/" in line:
+            paypal = ("paypal.me/"+line.split("paypal.me/")[1])
+            paypals.append(paypal)
+        if "@" in line:
+            line = line.replace('📩','')
+            temp_list_emails = []
+        if "/" in line and '"' in line:
+            line = (line.replace('/','@').split('"')[0])
+            temp_list_emails.append('.')
+            domain = '@'+line.split('@')[1]
+            if "." not in domain:
+                line = "@"+line.split("@")[1]
+                if " " in line:
+                    line = line.split(' ')[0]
+                    best_friend.append(line)
+                else:
+                    for i in emailss:
+                        if domain == i:
+                            if line not in emails_final:
+                                if ":" in line:
+                                    line = line.split(':')[1].strip()
+                                emails_final.append(line)
+    
         if len(love_situation) == 0:
             bio_infos['love_situation'] = None
         else:
@@ -314,4 +293,25 @@ def getInstagramInfos(username):
             bio_infos['paypal'] = None
         else:
             bio_infos['paypal'] = paypals[0]
-        return bio_infos
+    return bio_infos
+    
+def getInstagramInfos(username):
+    
+    url = "https://smihub.com/v/{}".format(username)
+
+    r = requests.get(url=url)
+    page = r.content.decode()
+    features = "html.parser"
+    soup = BeautifulSoup(page,features)
+
+    bioo = str(soup.find('div',{'class':'user__info-desc'}))
+
+    bioo = bioo.replace('<div','').replace('</div>','').replace('class="user__info-desc">','').strip()
+
+    while "<br/" in bioo:
+        bioo = bioo.replace('<br/','\n')
+
+    while ">" in bioo:
+        bioo = bioo.replace(">",'')
+    
+    return get_info_from_bio(bioo)
