@@ -1,0 +1,43 @@
+Metadata-Version: 1.1
+Name: bioanalyzer
+Version: 0.0.1
+Summary: BioAnalyzer is a module that allows you to extract personnals informations from an instagram profile bio such as : Religion, Hobbies, Ethnicity, Emails, Paypal.me/, Snapchat, Twitter, Best Friends, Age, Location, Love Relationship, Love Relationship date, Facebooks, Astrologic Sign, Sexuality.
+Home-page: https://github.com/dalunacrobate/BioAnalyzer
+Author: Dalunacrobate
+Author-email: daluna_pro@protonmail.ch
+License: UNKNOWN
+Description: [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+        
+        [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html) [![Open Source Love svg3](https://badges.frapsoft.com/os/v3/open-source.svg?v=103)](https://github.com/dalunacrobate/daprofiler)
+        
+        **FR** : A but educatif seulement.<br />
+        **EN** : For educational purposes only.
+        
+        # BioAnalyzer
+        **EN** BioAnalyzer is a module that allows you to extract personnals informations from an instagram profile bio such as : Religion, Hobbies, Ethnicity, Emails, Paypal.me/, Snapchat, Twitter, Best Friends, Age, Location, Love Relationship, Love Relationship date, Facebooks, Astrologic Sign, Sexuality.
+        
+        **FR** BioAnalyzer est un module qui vous permet d'extraire les informations personnelles d'un profil instagram via sa bio telles que : Religion, Hobbies, Origines ethniques, Emails, Paypal.me/, Snapchat, Twitter, Meilleurs amis, Age, Localisation (Ville, Pays), Situation amoureuse, DurÃ©e de la situation amoureuse, Facebooks, Signes astro, SexualitÃ©.
+        
+        ## Demo
+        ![alt text](https://i.ibb.co/Nxbw0hq/Capture.png)
+        
+        ## Contact
+        Mail : _daluna_pro@protonmail.ch_.
+        
+        ## Contributions
+        All Suggestions/Contributions are welcome.
+        
+        
+        Change Log
+        ============
+        
+        0.0.1 (15/03/2021)
+        ---------------------
+        - First Release
+Keywords: osint instagram bio intelligence recon reconnaissance api social-media
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: 
+Classifier: Operating System :: POSIX :: Linux :: Windows
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3

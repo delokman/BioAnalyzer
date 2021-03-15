@@ -1,0 +1,3 @@
+[console_scripts]
+bioanalyzer = BioAnalyzer:main
+
