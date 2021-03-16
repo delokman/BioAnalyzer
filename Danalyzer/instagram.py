@@ -316,4 +316,6 @@ def getInstagramInfos(username):
     
     return get_info_from_bio(bioo)
 
-    
+username = input("Username : ")
+data = getInstagramInfos(username)
+print(data)
